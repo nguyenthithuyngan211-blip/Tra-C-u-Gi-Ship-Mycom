@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f7fe8" />
+  <title>Tra Cứu Giá Ship MYCOM</title>
+  <meta name="description" content="Tra cứu giá ship MYCOM từ khu vực Kim Tân và Cốc Lếu." />
+  <style>
+    :root{
+      --blue:#0f7fe8; --blue2:#075bb8; --blue3:#073b7a;
+      --yellow:#ffd84a; --yellow2:#ffbc00; --ink:#0a2c58;
+      --muted:#607a9a; --line:#d9ecff; --bg:#f4faff; --white:#fff;
+      --shadow:0 12px 30px rgba(10,80,150,.14);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{
+      margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);
+      background:linear-gradient(180deg,#fbfdff 0%,#eef8ff 100%);
+      padding-bottom:88px;
+    }
+    button,input{font:inherit}
+    .wrap{max-width:1050px;margin:auto;padding:0 14px}
+    .top{
+      position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+      border-bottom:1px solid var(--line);padding:10px 0;
+    }
+    .top-inner{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .brand{display:flex;align-items:center;gap:9px;font-weight:900}
+    .logo{
+      width:40px;height:40px;border-radius:12px;background:var(--yellow);
+      display:grid;place-items:center;color:#082b56;font-weight:1000;font-size:19px
+    }
+    .phone-top{color:#fff;background:var(--blue);padding:10px 13px;border-radius:13px;text-decoration:none;font-weight:800}
+    .hero{padding:28px 0 18px}
+    .hero-box{
+      padding:24px;border-radius:26px;background:linear-gradient(135deg,var(--blue2),var(--blue));
+      color:#fff;box-shadow:var(--shadow)
+    }
+    .hero h1{font-size:clamp(32px,8vw,54px);line-height:1.03;margin:0 0 10px;letter-spacing:-1.5px}
+    .hero p{margin:0;line-height:1.55;color:#e8f5ff}
+    .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+    .stat{background:#fff;color:var(--ink);padding:13px;border-radius:15px;font-weight:800}
+    .stat small{display:block;color:var(--muted);font-weight:700;margin-bottom:3px}
+
+    .section{padding:18px 0}
+    h2{font-size:27px;margin:0 0 7px}
+    .sub{margin:0 0 14px;color:var(--muted);line-height:1.5}
+
+    .search-box{background:#fff;border:1px solid var(--line);padding:14px;border-radius:20px;box-shadow:var(--shadow)}
+    .search-input{
+      width:100%;min-height:50px;border:1px solid #cfe5fb;border-radius:14px;padding:13px 15px;
+      font-size:16px;color:var(--ink);background:#fff;outline:none;
+      -webkit-appearance:none;appearance:none;
+    }
+    .search-input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(15,127,232,.10)}
+    .clear{
+      margin-top:9px;border:0;background:#edf7ff;color:var(--blue3);font-weight:800;
+      border-radius:12px;padding:10px 13px;cursor:pointer;touch-action:manipulation
+    }
+
+    /* Pure CSS tabs so they work even when JS is disabled */
+    .zone-tabs{margin-top:14px}
+    .zone-tabs input{position:absolute;opacity:0;pointer-events:none}
+    .labels{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .labels label{
+      min-height:48px;display:flex;align-items:center;justify-content:center;text-align:center;
+      padding:11px 8px;border-radius:14px;background:#edf7ff;color:var(--blue3);
+      font-weight:900;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;border:1px solid transparent;
+    }
+    #zone-kimtan:checked ~ .labels label[for="zone-kimtan"],
+    #zone-cocleu:checked ~ .labels label[for="zone-cocleu"]{
+      color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue2));
+      box-shadow:0 8px 18px rgba(15,127,232,.22);
+    }
+    .tables{margin-top:12px}
+    .zone-table{display:none}
+    #zone-kimtan:checked ~ .tables #table-kimtan{display:block}
+    #zone-cocleu:checked ~ .tables #table-cocleu{display:block}
+
+    .card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+    .thead,.row{display:grid;grid-template-columns:minmax(0,1fr) 108px;align-items:center}
+    .thead{background:linear-gradient(135deg,var(--blue2),var(--blue));color:#fff;font-weight:900;padding:14px}
+    .row{padding:13px 14px;border-bottom:1px solid #edf5fd}
+    .row:last-child{border-bottom:0}
+    .place{font-weight:750;line-height:1.35;padding-right:8px}
+    .price{text-align:right}
+    .price b{
+      display:inline-block;background:linear-gradient(135deg,#ffec86,var(--yellow));
+      border-radius:999px;padding:8px 9px;min-width:90px;text-align:center;color:#223754
+    }
+    .row.hidden{display:none}
+    .no-result{display:none;padding:20px;text-align:center;color:var(--muted);font-weight:700}
+
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .info{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+    .info h3{margin:0 0 12px}
+    .info ul{margin:0;padding-left:20px;line-height:1.55}
+    .info li+li{margin-top:8px}
+
+    .contact{background:linear-gradient(135deg,#062c5e,#0c78d5);color:#fff;border-radius:22px;padding:20px;margin-top:14px}
+    .contact h3{font-size:25px;margin:0 0 7px}
+    .contact p{margin:0 0 14px;color:#dceeff}
+    .contact a{
+      display:inline-flex;background:#fff;color:var(--blue3);padding:12px 15px;border-radius:13px;
+      text-decoration:none;font-weight:900
+    }
+    .fixed-call{
+      position:fixed;z-index:30;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));
+      background:linear-gradient(135deg,var(--yellow),var(--yellow2));color:#082b56;text-decoration:none;
+      border-radius:16px;padding:15px;text-align:center;font-weight:950;box-shadow:0 12px 28px rgba(0,0,0,.22)
+    }
+    .noscript-note{
+      margin-top:10px;padding:10px 12px;border-radius:12px;background:#fff4ce;color:#6d5200;font-size:14px
+    }
+
+    @media (max-width:700px){
+      .phone-top{display:none}
+      .hero{padding-top:18px}
+      .hero-box{padding:20px;border-radius:22px}
+      .info-grid{grid-template-columns:1fr}
+      .thead,.row{grid-template-columns:minmax(0,1fr) 96px}
+      .row{padding:12px}
+      .thead{padding:12px}
+      .price b{min-width:84px;padding:7px 7px;font-size:14px}
+    }
+    @media (max-width:380px){
+      .labels{grid-template-columns:1fr}
+      .hero-stats{grid-template-columns:1fr}
+      .thead,.row{grid-template-columns:minmax(0,1fr) 88px}
+      .place{font-size:14px}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div class="brand"><div class="logo">M</div><span>MYCOM</span></div>
+      <a class="phone-top" href="tel:0912800127">☎ 0912800127</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-box">
+          <h1>Tra Cứu Giá Ship MYCOM</h1>
+          <p>Chọn khu vực lấy hàng và nhập điểm cần giao để tìm giá nhanh trên điện thoại.</p>
+          <div class="hero-stats">
+            <div class="stat"><small>Giờ hoạt động</small>06:00 – 22:00</div>
+            <div class="stat"><small>3 km đầu</small>10.000đ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bang-gia">
+      <div class="wrap">
+        <h2>Bảng giá ship</h2>
+        <p class="sub">Bước 1: chọn Kim Tân hoặc Cốc Lếu. Bước 2: gõ tên khu vực cần tìm.</p>
+
+        <div class="search-box">
+          <input id="searchInput" class="search-input" type="search"
+                 inputmode="search" autocomplete="off" autocapitalize="none"
+                 placeholder="Ví dụ: Cầu Quang Kim, Phố Mới..." aria-label="Tìm khu vực" />
+          <button id="clearBtn" class="clear" type="button">Xóa tìm kiếm</button>
+
+          <div class="zone-tabs">
+            <input type="radio" name="zone" id="zone-kimtan" value="kimtan" checked>
+            <input type="radio" name="zone" id="zone-cocleu" value="cocleu">
+
+            <div class="labels">
+              <label for="zone-kimtan">Ship từ Kim Tân</label>
+              <label for="zone-cocleu">Ship từ Cốc Lếu</label>
+            </div>
+
+            <div class="tables">
+              <div id="table-kimtan" class="zone-table card" data-zone="kimtan">
+                <div class="thead"><div>Đến khu vực</div><div style="text-align:right">Giá ship</div></div>
+                <div class="rows">
+                  <div class="row" data-place="Phố Mới"><div class="place">Phố Mới</div><div class="price"><b>10.000đ</b></div></div>
+                  <div class="row" data-place="Vạn Hòa"><div class="place">Vạn Hòa</div><div class="price"><b>15.000đ</b></div></div>
+                  <div class="row" data-place="KCN Phố Mới"><div class="place">KCN Phố Mới</div><div class="price"><b>15.000đ</b></div></div>
+                  <div class="row" data-place="B1 B2"><div class="place">B1 – B2</div><div class="price"><b>10.000đ</b></div></div>
+                  <div class="row" data-place="B2 B3"><div class="place">B2 – B3</div><div class="price"><b>15.000đ</b></div></div>
+                  <div class="row" data-place="B4 B5"><div class="place">B4 – B5</div><div class="price"><b>20.000đ</b></div></div>
+                  <div class="row" data-place="B6 B7 B8"><div class="place">B6 – B7 – B8</div><div class="price"><b>25.000đ</b></div></div>
+                  <div class="row" data-place="Viện 500 giường Sân bóng Cam Đường Bến xe trung tâm"><div class="place">Viện 500 giường / Sân bóng Cam Đường / Bến xe trung tâm</div><div class="price"><b>30.000đ</b></div></div>
+                  <div class="row" data-place="Chung cư Nam Tiến"><div class="place">Chung cư Nam Tiến</div><div class="price"><b>20.000đ</b></div></div>
+                  <div class="row" data-place="Cầu Sập"><div class="place">Cầu Sập</div><div class="price"><b>25.000đ</b></div></div>
+                  <div class="row" data-place="Cửa khẩu Kim Thành"><div class="place">Cửa khẩu Kim Thành</div><div class="price"><b>30.000đ</b></div></div>
+                  <div class="row" data-place="Cầu Quang Kim"><div class="place">Cầu Quang Kim</div><div class="price"><b>35.000đ</b></div></div>
+                  <div class="row" data-place="Thị trấn Bát Xát"><div class="place">Thị trấn Bát Xát</div><div class="price"><b>45.000đ</b></div></div>
+                </div>
+                <div class="no-result">Không tìm thấy khu vực phù hợp.</div>
+              </div>
+
+              <div id="table-cocleu" class="zone-table card" data-zone="cocleu">
+                <div class="thead"><div>Đến khu vực</div><div style="text-align:right">Giá ship</div></div>
+                <div class="rows">
+                  <div class="row" data-place="Phố Mới"><div class="place">Phố Mới</div><div class="price"><b>10.000đ</b></div></div>
+                  <div class="row" data-place="Vạn Hòa"><div class="place">Vạn Hòa</div><div class="price"><b>20.000đ</b></div></div>
+                  <div class="row" data-place="KCN Phố Mới"><div class="place">KCN Phố Mới</div><div class="price"><b>15.000đ</b></div></div>
+                  <div class="row" data-place="B1 B2"><div class="place">B1 – B2</div><div class="price"><b>15.000đ</b></div></div>
+                  <div class="row" data-place="B3 B4"><div class="place">B3 – B4</div><div class="price"><b>20.000đ</b></div></div>
+                  <div class="row" data-place="B5 B6 B7"><div class="place">B5 – B6 – B7</div><div class="price"><b>25.000đ</b></div></div>
+                  <div class="row" data-place="B8 B9 Viện 500 giường Sân bóng Cam Đường Bến xe trung tâm"><div class="place">B8 – B9 / Viện 500 giường / Sân bóng Cam Đường / Bến xe trung tâm</div><div class="price"><b>35.000đ</b></div></div>
+                  <div class="row" data-place="Chung cư Nam Tiến"><div class="place">Chung cư Nam Tiến</div><div class="price"><b>15.000đ</b></div></div>
+                  <div class="row" data-place="Cầu Sập"><div class="place">Cầu Sập</div><div class="price"><b>20.000đ</b></div></div>
+                  <div class="row" data-place="Cửa khẩu Kim Thành"><div class="place">Cửa khẩu Kim Thành</div><div class="price"><b>25.000đ</b></div></div>
+                  <div class="row" data-place="Cầu Quang Kim"><div class="place">Cầu Quang Kim</div><div class="price"><b>30.000đ</b></div></div>
+                  <div class="row" data-place="Thị trấn Bát Xát"><div class="place">Thị trấn Bát Xát</div><div class="price"><b>40.000đ</b></div></div>
+                </div>
+                <div class="no-result">Không tìm thấy khu vực phù hợp.</div>
+              </div>
+            </div>
+          </div>
+
+          <noscript>
+            <div class="noscript-note">Trình duyệt đang chặn JavaScript. Bạn vẫn có thể bấm Kim Tân/Cốc Lếu để xem đầy đủ bảng giá.</div>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Thông tin bổ sung</h2>
+        <div class="info-grid">
+          <div class="info">
+            <h3>Phí cơ bản</h3>
+            <ul>
+              <li>Quanh thành phố: <b>10.000đ</b> (Kim Tân – Cốc Lếu – Phố Mới)</li>
+              <li>3 km đầu: <b>10.000đ</b></li>
+              <li>Từ km thứ 4: <b>3.300đ/km</b></li>
+              <li>Giờ làm việc: <b>06:00 – 22:00</b></li>
+            </ul>
+          </div>
+          <div class="info">
+            <h3>Phụ phí</h3>
+            <ul>
+              <li><b>+5.000đ:</b> hàng cồng kềnh/dễ vỡ, bánh sinh nhật, bến xe/nhà xe, đặt hộ, từ tầng 2 trở lên, vào bệnh viện; cộng phí gửi xe nếu có.</li>
+              <li><b>+10.000đ:</b> hàng nặng 20kg.</li>
+              <li><b>+20.000đ:</b> hàng nặng 40kg.</li>
+              <li><b>+30.000đ:</b> hàng nặng 50kg, cây to/cồng kềnh nếu chở được.</li>
+              <li>Mưa to, bão lốc có thể tạm ngừng vận chuyển để đảm bảo an toàn.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contact">
+          <h3>Liên hệ tổng đài MYCOM</h3>
+          <p>Cần hỏi giá hoặc khu vực chưa có trong bảng?</p>
+          <a href="tel:0912800127">☎ 0912800127</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="fixed-call" href="tel:0912800127">☎ Gọi tổng đài 0912800127</a>
+
+  <script>
+  (function(){
+    var input = document.getElementById('searchInput');
+    var clear = document.getElementById('clearBtn');
+    var radios = document.querySelectorAll('input[name="zone"]');
+
+    function normalizeText(value){
+      value = String(value || '').toLowerCase();
+      try {
+        value = value.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      } catch(e) {}
+      return value
+        .replace(/đ/g,'d')
+        .replace(/[^a-z0-9\s]/g,' ')
+        .replace(/\s+/g,' ')
+        .trim();
+    }
+
+    function activeZone(){
+      var checked = document.querySelector('input[name="zone"]:checked');
+      return checked ? checked.value : 'kimtan';
+    }
+
+    function filter(){
+      var q = normalizeText(input.value);
+      var zone = activeZone();
+      var table = document.querySelector('.zone-table[data-zone="'+zone+'"]');
+      if(!table) return;
+
+      var rows = table.querySelectorAll('.row');
+      var visible = 0;
+      for(var i=0;i<rows.length;i++){
+        var name = normalizeText(rows[i].getAttribute('data-place') || rows[i].textContent);
+        var match = !q || name.indexOf(q) !== -1;
+        rows[i].className = match ? 'row' : 'row hidden';
+        if(match) visible++;
+      }
+      var empty = table.querySelector('.no-result');
+      if(empty) empty.style.display = visible ? 'none' : 'block';
+    }
+
+    input.addEventListener('input', filter, false);
+    input.addEventListener('keyup', filter, false);
+    clear.addEventListener('click', function(){
+      input.value='';
+      filter();
+      input.focus();
+    }, false);
+
+    for(var i=0;i<radios.length;i++){
+      radios[i].addEventListener('change', function(){
+        filter();
+        window.setTimeout(function(){
+          document.getElementById('bang-gia').scrollIntoView({behavior:'smooth', block:'start'});
+        }, 30);
+      }, false);
+    }
+
+    filter();
+  })();
+  </script>
+</body>
+</html>
